@@ -1,0 +1,43 @@
+{
+  "name" : "json-copy-copy",
+  "jobMode" : "SCRIPT",
+  "description" : "",
+  "role" : "arn:aws:iam::339712784141:role/LabRole",
+  "executionProperty" : {
+    "maxConcurrentRuns" : 1
+  },
+  "command" : {
+    "name" : "glueetl",
+    "scriptLocation" : "s3://aws-glue-assets-339712784141-us-east-1/scripts/json-copy-copy.py",
+    "pythonVersion" : "3"
+  },
+  "defaultArguments" : {
+    "--SOURCE_PATH" : "s3://ade-mybucket-vrpn2n/flights_data/date=2025-11-09/data.json",
+    "--TARGET_PATH" : "s3://query-bucket-vrpn2n/output/",
+    "--enable-glue-datacatalog" : "true",
+    "--job-bookmark-option" : "job-bookmark-disable",
+    "--TempDir" : "s3://aws-glue-assets-339712784141-us-east-1/temporary/",
+    "--GLUE_TABLE" : "bsziflights_data",
+    "JOB_NAME" : "json-copy-copy",
+    "--enable-metrics" : "true",
+    "--spark-event-logs-path" : "s3://aws-glue-assets-339712784141-us-east-1/sparkHistoryLogs/",
+    "--enable-job-insights" : "true",
+    "--enable-observability-metrics" : "true",
+    "--job-language" : "python",
+    "--GLUE_DB" : "flights-vrpn2n"
+  },
+  "maxRetries" : 0,
+  "allocatedCapacity" : 2,
+  "timeout" : 480,
+  "maxCapacity" : 2.0,
+  "glueVersion" : "5.0",
+  "numberOfWorkers" : 2,
+  "workerType" : "G.1X",
+  "executionClass" : "STANDARD",
+  "sourceControlDetails" : {
+    "provider" : "GITHUB",
+    "repository" : "glue",
+    "branch" : "main",
+    "folder" : "json-copy-copy"
+  }
+}
